@@ -19,9 +19,6 @@ class ChatGPT(commands.Cog):
             "max_tokens": 700,
             "mention": True,
             "reply": True,
-            str.prompt: "assistant",
-            int.temperature: 0.5,
-            int.top: 0.1
         }
         self.config.register_global(**default_global)
         self.client = None
@@ -96,7 +93,7 @@ class ChatGPT(commands.Cog):
 
     async def build_messages(self, ctx: commands.Context, messages: List[Message], message: Message, messageText: str = None):
         role = "system" if message.author.id == self.bot.user.id else "user"
-        messages = [ 	{ "role": "system", "content": self.prompt }]
+        
         content = messageText if messageText else message.clean_content
         to_strip = f"(?m)^(<@!?{self.bot.user.id}>)"
         is_mention = re.search(to_strip, message.content)
@@ -117,9 +114,9 @@ class ChatGPT(commands.Cog):
         stream = self.client.chat.completions.create(
             model=model, 
             messages=messages, 
-            temperature=self.temperature,
+            temperature=0.4,
             max_tokens=max_tokens,
-            top_p=self.top,
+            top_p=0.1,
             stream=True
         )
         
