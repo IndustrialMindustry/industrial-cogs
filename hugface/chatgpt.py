@@ -16,7 +16,7 @@ class ChatGPT(commands.Cog):
         default_global = {
             "openai_api_key": None,
             "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
-            "max_tokens": 500,
+            "max_tokens": 700,
             "mention": True,
             "reply": True
            
@@ -163,7 +163,7 @@ class ChatGPT(commands.Cog):
     async def gethftokens(self, ctx: commands.Context):
         """Get the maximum number of tokens for Model to generate.
 
-        Defaults to `500`, see HF."""
+        Defaults to `700`, see HF."""
         model = await self.config.max_tokens()
         await ctx.send(f"HF maximum number of tokens set to `{model}`")
 
@@ -172,7 +172,7 @@ class ChatGPT(commands.Cog):
     async def sethftokens(self, ctx: commands.Context, number: str):
         """Set the maximum number of tokens for HF to generate.
 
-        Defaults to `500` See HF."""
+        Defaults to `700` See HF."""
         try:
             await self.config.max_tokens.set(int(number))
             await ctx.send("HF maximum number of tokens set.")
