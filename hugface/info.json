@@ -1,0 +1,12 @@
+{
+    "author": ["Skylark95"],
+    "name": "HF",
+    "description": "Send messages to HF",
+    "install_msg": "Require HF api key. see huggingface site to get an API.",
+    "short": "Send messages to HuggingFace AI, fork of ChatGPT cog.",
+    "tags": ["huggingface", "openai"],
+    "requirements": ["openai"],
+    "type": "COG",
+    "end_user_data_statement": "This cog does not persistently store data or metadata about users. However, this cog does pass user data to an external API for the purposes of simulated conversation responses. (huggingface)",
+    "min_bot_version": "3.5.0"
+}
