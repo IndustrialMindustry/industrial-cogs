@@ -16,7 +16,7 @@ class ChatGPT(commands.Cog):
         default_global = {
             "openai_api_key": None,
             "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
-            "max_tokens": 400,
+            "max_tokens": 500,
             "mention": True,
             "reply": True
            
@@ -57,7 +57,7 @@ class ChatGPT(commands.Cog):
             await self.do_chatgpt(ctx)
 
     @commands.command(aliases=['chat'])
-    async def chatgpt(self, ctx: commands.Context, *, message: str):
+    async def huggingface(self, ctx: commands.Context, *, message: str):
         """Send a message to HF."""
         await self.do_chatgpt(ctx, message)
 
@@ -142,7 +142,7 @@ class ChatGPT(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def getchatgptmodel(self, ctx: commands.Context):
+    async def gethfmodel(self, ctx: commands.Context):
         """Get the model for HF.
 
         Defaults to "Qwen/Qwen2.5-Coder-32B-Instruct` See huggingface for a list of models."""
@@ -151,7 +151,7 @@ class ChatGPT(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def setchatgptmodel(self, ctx: commands.Context, model: str):
+    async def sethfmodel(self, ctx: commands.Context, model: str):
         """Set the model for HF.
 
         Defaults to `Qwen/Qwen2.5-Coder-32B-Instruct` See huggingface for a list of models."""
@@ -160,19 +160,19 @@ class ChatGPT(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def getchatgpttokens(self, ctx: commands.Context):
+    async def gethftokens(self, ctx: commands.Context):
         """Get the maximum number of tokens for Model to generate.
 
-        Defaults to `2048`, see HF."""
+        Defaults to `500`, see HF."""
         model = await self.config.max_tokens()
         await ctx.send(f"HF maximum number of tokens set to `{model}`")
 
     @commands.command()
     @checks.is_owner()
-    async def setchatgpttokens(self, ctx: commands.Context, number: str):
+    async def sethftokens(self, ctx: commands.Context, number: str):
         """Set the maximum number of tokens for HF to generate.
 
-        Defaults to `2048` See HF."""
+        Defaults to `500` See HF."""
         try:
             await self.config.max_tokens.set(int(number))
             await ctx.send("HF maximum number of tokens set.")
@@ -181,7 +181,7 @@ class ChatGPT(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def togglechatgptmention(self, ctx: commands.Context):
+    async def togglehfmention(self, ctx: commands.Context):
         """Toggle messages to HF on mention.
 
         Defaults to `True`."""
@@ -194,7 +194,7 @@ class ChatGPT(commands.Cog):
 
     @commands.command()
     @checks.is_owner()
-    async def togglechatgptreply(self, ctx: commands.Context):
+    async def togglehfreply(self, ctx: commands.Context):
         """Toggle messages to HF on reply.
 
         Defaults to `True`."""
