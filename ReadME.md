@@ -13,6 +13,7 @@
 `
 [p]cog install industrial-cogs hugface 
 `
+
 To set API, go to https://huggingface.co/ > create account > get API, or Access tokens and use:
 `
 [p]set api api_key <key>
