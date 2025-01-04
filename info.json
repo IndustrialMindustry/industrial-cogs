@@ -5,4 +5,5 @@
     "short" : "Utility cogs that i made/forked with changes.",
     "description" : "Utility cogs such as HuggingFace AI, maybe some others later;)",
     "tags" : ["HuggingFace, AI, Utility."]
+    "requirements" : ["openai"]
 }
