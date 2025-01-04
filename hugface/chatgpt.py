@@ -18,8 +18,10 @@ class ChatGPT(commands.Cog):
             "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
             "max_tokens": 700,
             "mention": True,
-            "reply": True
-           
+            "reply": True,
+            "prompt": "assistant",
+            "temperature": 0.5,
+            "top": 0.1
         }
         self.config.register_global(**default_global)
         self.client = None
@@ -93,7 +95,8 @@ class ChatGPT(commands.Cog):
         )
 
     async def build_messages(self, ctx: commands.Context, messages: List[Message], message: Message, messageText: str = None):
-        role = "assistant" if message.author.id == self.bot.user.id else "user"
+        role = "system" if message.author.id == self.bot.user.id else "user"
+        messages = [ 	{ "role": "system", "content": self.prompt }]
         content = messageText if messageText else message.clean_content
         to_strip = f"(?m)^(<@!?{self.bot.user.id}>)"
         is_mention = re.search(to_strip, message.content)
@@ -114,9 +117,9 @@ class ChatGPT(commands.Cog):
         stream = self.client.chat.completions.create(
             model=model, 
             messages=messages, 
-            temperature=0.8,
+            temperature=self.temperature,
             max_tokens=max_tokens,
-            top_p=0.5,
+            top_p=self.top,
             stream=True
         )
         
@@ -204,3 +207,27 @@ class ChatGPT(commands.Cog):
             await ctx.send("Enabled sending messages to HF on bot reply.")
         else:
             await ctx.send("Disabled sending messages to HF on bot reply.")
+    @commands.command()
+    @checks.is_owner()
+    async def setmodelrole(self, ctx: commands.Context, model: str):
+        """Set the role for HF.
+
+        Defaults to `assistant."""
+        await self.config.prompt.set(model)
+        await ctx.send("HF model set.")
+    @commands.command()
+    @checks.is_owner()
+    async def settemp(self, ctx: commands.Context, model: float):
+        """Set the temp for HF.
+
+        Defaults to `0.5"""
+        await self.config.temperature.set(model)
+        await ctx.send("HF temperature set.")
+    @commands.command()
+    @checks.is_owner()
+    async def settopp(self, ctx: commands.Context, model: float):
+        """Set the Top-P for HF.
+
+        Defaults to `0.1"""
+        await self.config.top.set(model)
+        await ctx.send("HF top-p set.")
