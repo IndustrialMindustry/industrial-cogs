@@ -2,7 +2,7 @@
     "author": ["Skylark95"],
     "name": "HF",
     "description": "Send messages to HF",
-    "install_msg": "Require HF api key. see huggingface site to get an API.",
+    "install_msg": "Require HuggingFace api key. To set API, go to https://huggingface.co/ > create account > get API, or Access tokens and use: `[p]set api api_key <key>`",
     "short": "Send messages to HuggingFace AI, fork of ChatGPT cog.",
     "tags": ["huggingface", "openai"],
     "requirements": ["openai"],
