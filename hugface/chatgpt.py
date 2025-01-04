@@ -19,9 +19,9 @@ class ChatGPT(commands.Cog):
             "max_tokens": 700,
             "mention": True,
             "reply": True,
-            "prompt": "assistant",
-            "temperature": 0.5,
-            "top": 0.1
+            str.prompt: "assistant",
+            int.temperature: 0.5,
+            int.top: 0.1
         }
         self.config.register_global(**default_global)
         self.client = None
